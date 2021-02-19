@@ -27,5 +27,20 @@
 
     <!-- Flag indicating whether we should enable the adaptive sleep.-->
     <bool name="config_adaptive_sleep_available">true</bool>
+    
+    <!-- Default fod pressed color -->
+    <integer name="config_fod_pressed_color">0</integer>
+
+    <!-- Screen off FOD -->
+    <bool name="config_supportScreenOffFod">true</bool>
+    
+    <!-- Flag specifying whether pocked mode is available on device -->
+    <bool name="config_pocketModeSupported">true</bool>
+        
+    <!-- Smart charging -->
+    <bool name="config_smartChargingAvailable">true</bool>
+    <string name="config_smartChargingSysfsNode" translatable="false">/sys/class/power_supply/battery/input_suspend</string>
+    <string name="config_smartChargingSuspendValue" translatable="false">1</string>
+    <string name="config_smartChargingResumeValue" translatable="false">0</string>
 
 </resources>
