@@ -182,6 +182,10 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
     init.safailnet.rc
 
+# Recorder
+PRODUCT_PACKAGES += \
+    OPScreenRecorder
+    
 # Telephony
 PRODUCT_PACKAGES += \
     ims-ext-common \
