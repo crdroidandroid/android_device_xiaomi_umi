@@ -23,8 +23,6 @@
 #include <cmath>
 #include <fstream>
 
-#define FINGERPRINT_ACQUIRED_VENDOR 6
-
 #define COMMAND_NIT 10
 #define PARAM_NIT_FOD 1
 #define PARAM_NIT_NONE 0
@@ -33,7 +31,10 @@
 
 #define FOD_SENSOR_X 441
 #define FOD_SENSOR_Y 1808
-#define FOD_SENSOR_SIZE 197
+#define FOD_SENSOR_SIZE 195
+
+#define BRIGHTNESS_PATH "/sys/class/backlight/panel0-backlight/brightness"
+#define FINGERPRINT_ACQUIRED_VENDOR 6
 
 namespace vendor {
 namespace lineage {
@@ -42,6 +43,15 @@ namespace fingerprint {
 namespace inscreen {
 namespace V1_0 {
 namespace implementation {
+    
+template <typename T>
+static T get(const std::string& path, const T& def) {
+    std::ifstream file(path);
+    T result;
+
+    file >> result;
+    return file.fail() ? def : result;
+}
 
 template <typename T>
 static void set(const std::string& path, const T& value) {
@@ -63,6 +73,24 @@ Return<int32_t> FingerprintInscreen::getPositionY() {
     return FOD_SENSOR_Y;
 }
 
+Return<int32_t> FingerprintInscreen::getDimAmount(int32_t /* brightness */) {
+     float alpha;
+    int realBrightness = get(BRIGHTNESS_PATH, 0);
+
+    if (realBrightness >= 500) {
+        alpha = 1.0 - pow(realBrightness / 2047.0 * 430.0 / 600.0, 0.590);
+    } else if (realBrightness < 500 && realBrightness >=250) {
+        alpha = 1.0 - pow(realBrightness / 2047.0 * 430.0 / 600.0, 0.565);
+    } else if (realBrightness > 30) {
+         alpha = 1.0 - pow(realBrightness / 2047.0 * 430.0 / 600.0, 0.486);
+    }else{
+        alpha = 1.0 - pow(realBrightness / 1680.0, 0.515);
+    }
+    return 255 * alpha;
+}
+/**
+
+**/
 Return<int32_t> FingerprintInscreen::getSize() {
     return FOD_SENSOR_SIZE;
 }
@@ -105,8 +133,8 @@ Return<bool> FingerprintInscreen::handleAcquired(int32_t acquiredInfo, int32_t v
         return false;
     }
 
-    if (acquiredInfo == FINGERPRINT_ACQUIRED_VENDOR) {
-        if (vendorCode == 0) {
+    if (acquiredInfo == 6) {
+        if (vendorCode == 22) {
             Return<void> ret = mCallback->onFingerDown();
             if (!ret.isOk()) {
                 LOG(ERROR) << "FingerDown() error: " << ret.description();
@@ -114,7 +142,7 @@ Return<bool> FingerprintInscreen::handleAcquired(int32_t acquiredInfo, int32_t v
             return true;
         }
 
-        if (vendorCode == 1) {
+        if (vendorCode == 23) {
             Return<void> ret = mCallback->onFingerUp();
             if (!ret.isOk()) {
                 LOG(ERROR) << "FingerUp() error: " << ret.description();
@@ -122,7 +150,7 @@ Return<bool> FingerprintInscreen::handleAcquired(int32_t acquiredInfo, int32_t v
             return true;
         }
     }
-
+    LOG(ERROR) << "acquiredInfo: " << acquiredInfo << ", vendorCode: " << vendorCode << "\n";
     return false;
 }
 
@@ -135,20 +163,6 @@ Return<void> FingerprintInscreen::setLongPressEnabled(bool) {
     return Void();
 }
 
-Return<int32_t> FingerprintInscreen::getDimAmount(int32_t brightness) {
-    float alpha;
-
-    if (brightness == 9.0) {
-        alpha = 0.9619584887;
-    } else if (brightness > 40) {
-        alpha = 1.0 - pow(((((brightness * 1.0) / 255.0) * 430.0) / 600.0), 0.455);
-    } else {
-        alpha = 1.0 - pow((brightness * 1.0) / 210.0, 0.455);
-    }
-
-    return 255 * alpha;
-}
-
 Return<bool> FingerprintInscreen::shouldBoostBrightness() {
     return false;
 }
@@ -158,7 +172,6 @@ Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallb
         std::lock_guard<std::mutex> _lock(mCallbackLock);
         mCallback = callback;
     }
-
     return Void();
 }
 

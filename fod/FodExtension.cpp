@@ -1,5 +1,4 @@
-/*
- * Copyright (C) 2020 The LineageOS Project
+/* * Copyright (C) 2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +17,7 @@
 
 uint32_t getFodZOrder(uint32_t z, bool touched) {
     if (touched) {
-        z |= 0x9000000;
+        z |= 150994948;
     }
     return z;
 }
