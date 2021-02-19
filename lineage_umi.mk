@@ -20,6 +20,9 @@ $(call inherit-product, device/xiaomi/umi/kona.mk)
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
+# crDroid Specific
+TARGET_HAS_FOD := true
+
 # Override build properties
 PRODUCT_NAME := lineage_umi
 PRODUCT_DEVICE := umi
