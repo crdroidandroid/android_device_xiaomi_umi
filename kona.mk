@@ -187,10 +187,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.ims.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.ims.xml
 
-# PowerShare
-PRODUCT_PACKAGES += \
-    lineage.powershare@1.0-service.xiaomi_kona
-
 # QTI common
 TARGET_COMMON_QTI_COMPONENTS := \
     perf \
