@@ -22,6 +22,7 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # crDroid Specific
 TARGET_HAS_FOD := true
+EXTRA_FOD_ANIMATIONS := true
 
 # Override build properties
 PRODUCT_NAME := lineage_umi
