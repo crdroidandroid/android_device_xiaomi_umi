@@ -20,6 +20,11 @@ $(call inherit-product, device/xiaomi/umi/kona.mk)
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2400
+TARGET_SCREEN_WIDTH := 1080
+TARGET_BOOT_ANIMATION_RES := 1080
+
 # crDroid Specific
 TARGET_HAS_FOD := true
 EXTRA_FOD_ANIMATIONS := true
