@@ -75,7 +75,7 @@
      <bool name="config_pinnerHomeApp">true</bool>
 
     <!-- Height of the status bar -->
-    <dimen name="status_bar_height_portrait">120px</dimen>
+    <dimen name="status_bar_height_portrait">92px</dimen>
 
     <!-- Height of the status bar in landscape -->
     <dimen name="status_bar_height_landscape">24dp</dimen>
