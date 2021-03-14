@@ -20,6 +20,9 @@ $(call inherit-product, device/xiaomi/umi/kona.mk)
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
+# Inherit GMS
+$(call inherit-product, vendor/google/gms/config.mk)
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
