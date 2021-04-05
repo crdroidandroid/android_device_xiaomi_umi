@@ -71,7 +71,7 @@ system_ext/framework/embmslibrary.jar
 system_ext/framework/qcrilhook.jar
 
 # Radio - from LA.QSSI.11.0.r1-08800-qssi.0.
-system_ext/framework/qti-telephony-common.jar|e6f7c4df7b925073525d9b678f27087e1f45017f
+-system_ext/framework/qti-telephony-common.jar|710406e01836b558c802ba4960fa59f31545389e
 -system_ext/priv-app/ims/ims.apk|cccc15a4fbaff0f412e09e63744fc95c3c339da8
 
 # Radio_IMS
