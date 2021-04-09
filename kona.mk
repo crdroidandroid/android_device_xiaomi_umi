@@ -177,6 +177,9 @@ PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_BUILD_PRODUCT_IMAGE := true
 
 # Perf
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.perf@2.0
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perfconfigstore.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/perf/perfconfigstore.xml
 
@@ -189,7 +192,6 @@ PRODUCT_COPY_FILES += \
 
 # QTI common
 TARGET_COMMON_QTI_COMPONENTS := \
-    perf \
     wfd
 
 # Ramdisk
