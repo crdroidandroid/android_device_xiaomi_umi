@@ -13,6 +13,10 @@
 -->
 <resources>
 
+    <!-- Pocket Lock -->
+    <bool name="config_pocketModeSupported">false</bool>
+    <bool name="config_pocketUseLightSensor">false</bool>
+
     <!-- Whether to show a custom view for FOD -->
     <bool name="config_needCustomFODView">true</bool>
 
