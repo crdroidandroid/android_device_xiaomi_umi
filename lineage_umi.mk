@@ -14,6 +14,10 @@ $(call inherit-product, device/xiaomi/umi/device.mk)
 # Inherit from the Lineage configuration.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
+# crDroid Specific
+TARGET_HAS_FOD := true
+EXTRA_FOD_ANIMATIONS := true
+
 PRODUCT_NAME := lineage_umi
 PRODUCT_DEVICE := umi
 PRODUCT_BRAND := Xiaomi
